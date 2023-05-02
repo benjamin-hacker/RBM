@@ -143,3 +143,9 @@ class RBM():
             ph, h = rbm.h_given_v(v)
             pv, v = rbm.v_given_h(h)
         return v
+    
+    def compute_loss(self, data):
+        energy = self.free_energy(data)
+        recon_data = self.reconstruct(data)
+        recon_energy = self.free_energy(recon_data)
+        return np.mean(energy - recon_energy)
